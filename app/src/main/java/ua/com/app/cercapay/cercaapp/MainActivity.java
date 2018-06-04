@@ -16,6 +16,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +34,7 @@ import ua.com.app.cercapay.cercaapp.btserver.interfaces.BluetoothServerListener;
 import ua.com.app.cercapay.cercaapp.btserver.interfaces.BluetoothThreadsFabric;
 import ua.com.app.cercapay.cercaapp.btserver.interfaces.ConnectedThreadListener;
 import ua.com.app.cercapay.cercaapp.btserver.interfaces.ConnectionStateProvider;
+import ua.com.app.cercapay.cercaapp.btserver.model.ICabbyData;
 import ua.com.app.cercapay.cercaapp.btserver.threads.AcceptThread;
 import ua.com.app.cercapay.cercaapp.btserver.threads.ConnectedThread;
 
@@ -40,16 +43,16 @@ import ua.com.app.cercapay.cercaapp.btserver.threads.ConnectedThread;
 
 public class MainActivity extends AppCompatActivity implements BluetoothServerListener {
 
-    private static final int MESSAGE = 02;
-    private int LOG_ID = 01;
     public static final int PERMISSION_REQUEST_CODE = 007;
+    private static final int MESSAGE = 02;
+    List<String> mLogsList = new ArrayList<>();
+    LogsAdapter mLogsAdapter;
+    private int LOG_ID = 01;
     private BluetoothServer mBluetoothServer;
     private UUID mId = UUID.fromString("c90c5b86-536f-11e8-9c2d-fa7ae01bbebc");
     private RecyclerView mLogsRecycler;
     private Handler mHandler;
     private Button mBtnSend;
-    List<String> mLogsList = new ArrayList<>();
-    LogsAdapter mLogsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements BluetoothServerLi
                     log((String) msg.obj);
                 }
                 if (msg.what == MESSAGE) {
+                    ICabbyData cabbyData = new Gson().fromJson((String) msg.obj, ICabbyData.class);
                     log((String) msg.obj);
                 }
             }
@@ -154,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements BluetoothServerLi
 
     @Override
     public void onByteCame(final byte[] b) {
-        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE, "< iCabby: " + new String(b)));
+        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE, new String(b)));
     }
 
     @Override
