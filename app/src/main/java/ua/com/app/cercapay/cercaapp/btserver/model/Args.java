@@ -30,55 +30,28 @@ public class Args {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public Integer getFare() {
         return fare;
-    }
-
-    public void setFare(Integer fare) {
-        this.fare = fare;
     }
 
     public Integer getExtras() {
         return extras;
     }
 
-    public void setExtras(Integer extras) {
-        this.extras = extras;
-    }
-
     public Integer getTotalAmount() {
         return totalAmount;
-    }
-
-    public void setTotalAmount(Integer totalAmount) {
-        this.totalAmount = totalAmount;
     }
 
     public Boolean getFlatRate() {
         return flatRate;
     }
 
-    public void setFlatRate(Boolean flatRate) {
-        this.flatRate = flatRate;
-    }
-
     public String getTripId() {
         return tripId;
-    }
-
-    public void setTripId(String tripId) {
-        this.tripId = tripId;
     }
 
     public Boolean getAccount() {
         return account;
     }
 
-    public void setAccount(Boolean account) {
-        this.account = account;
-    }
 }

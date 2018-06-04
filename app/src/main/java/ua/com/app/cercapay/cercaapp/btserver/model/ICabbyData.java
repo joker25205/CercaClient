@@ -16,18 +16,7 @@ public class ICabbyData {
         return cmd;
     }
 
-    public void setCmd(String cmd) {
-        this.cmd = cmd;
-    }
-
     public Args getArgs() {
         return args;
     }
-
-    public void setArgs(Args args) {
-        this.args = args;
-    }
-
-
-
 }
